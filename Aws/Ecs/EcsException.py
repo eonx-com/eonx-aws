@@ -1,0 +1,2 @@
+class EcsException(Exception):
+    pass
