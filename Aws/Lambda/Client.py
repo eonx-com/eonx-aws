@@ -40,8 +40,8 @@ class Client(BaseClient):
             FunctionName=function_name,
             InvocationType='RequestResponse',
             LogType='Tail',
-            ClientContext=client_context,
-            Payload=payload
+            ClientContext=client_context or '',
+            Payload=payload or ''
         )
 
         return result
