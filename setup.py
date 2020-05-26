@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='eonx-aws',
-    version='0.0.5',
+    version='0.0.6',
     description='eonx-aws',
     url='git@github.com:eonx-com/eonx-aws.git',
     author='Damian Sloane',
@@ -16,5 +16,5 @@ setup(
         'Aws.Sso'
     ],
     zip_safe=False,
-    install_requires=['boto', 'boto3', 'botocore']
+    install_requires=['boto3']
 )
