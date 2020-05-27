@@ -57,10 +57,11 @@ class Iterator:
             if token_key_next != token_key_previous:
                 if token_key_next in result.keys() and token_key_previous in result.keys():
                     if '/' in token_key_next and '/' in token_key_previous:
-                        read_split = result[token_key_next].split('/')[1]
-                        write_split = result[token_key_previous].split('/')[1]
-
-                        if read_split == write_split:
+                        read_split = result[token_key_next].split('/')
+                        write_split = result[token_key_previous].split('/')
+                        print(read_split)
+                        print(write_split)
+                        if read_split[1] == write_split[1]:
                             break
 
             # Add pagination token to next method call and get next page of results
