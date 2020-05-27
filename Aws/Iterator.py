@@ -54,7 +54,7 @@ class Iterator:
             if token_key_read != token_key_write:
                 read_split = result[token_key_read].split('/')[1]
                 write_split = result[token_key_write].split('/')[1]
-                
+
                 if read_split == write_split:
                     break
 
