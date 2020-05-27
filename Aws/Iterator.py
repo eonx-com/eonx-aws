@@ -52,11 +52,13 @@ class Iterator:
 
             # If both keys are different, but have the same value get out of here
             if token_key_read != token_key_write:
-                read_split = result[token_key_read].split('/')[1]
-                write_split = result[token_key_write].split('/')[1]
+                if token_key_read in result.keys() and token_key_write in result.keys():
+                    if '/' in token_key_read and '/' in token_key_write:
+                        read_split = result[token_key_read].split('/')[1]
+                        write_split = result[token_key_write].split('/')[1]
 
-                if read_split == write_split:
-                    break
+                        if read_split == write_split:
+                            break
 
             # Add pagination token to next method call and get next page of results
             arguments[token_key_write] = result[token_key_read]
