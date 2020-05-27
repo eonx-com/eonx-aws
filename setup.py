@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='eonx-aws',
-    version='0.0.17',
+    version='0.0.18',
     description='eonx-aws',
     url='git@github.com:eonx-com/eonx-aws.git',
     author='Damian Sloane',

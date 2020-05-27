@@ -42,9 +42,10 @@ class Iterator:
             return return_list
 
         while True:
+            # If there is nothing left- get out of here
             if len(result[data_key]) == 0:
                 break
-            Log.trace('Extending result: {result}'.format(result=result))
+
             return_list.extend(result[data_key])
 
             # Check if there are any more results to retrieve
@@ -53,7 +54,6 @@ class Iterator:
 
             # Add pagination token to next method call and get next page of results
             arguments[token_key_write] = result[token_key_next]
-            Log.trace('Arguments: {arguments}'.format(arguments=arguments))
             result = method_to_call(**arguments)
 
         # Return the results we found
