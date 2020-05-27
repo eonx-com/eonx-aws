@@ -43,7 +43,8 @@ class Client(BaseClient):
             arguments={
                 'logGroupName': log_group_name,
                 'logStreamName': log_stream_name,
-                'startFromHead': True
+                'startFromHead': True,
+                'limit': 50
             }
         )
 
