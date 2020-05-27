@@ -38,7 +38,8 @@ class Client(BaseClient):
             client=self.__client__,
             method_name='get_log_events',
             data_key='events',
-            token_key_read='nextForwardToken',
+            token_key_next='nextForwardToken',
+            token_key_previous='nextBackwardToken',
             token_key_write='nextToken',
             arguments={
                 'logGroupName': log_group_name,
