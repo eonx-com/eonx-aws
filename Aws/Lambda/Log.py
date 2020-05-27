@@ -241,11 +241,11 @@ class Log:
 
             if is_unit_test is True:
                 # Running unit tests, disable logging
-                print('Running unit tests, logging test messages only...')
+                print('Running unit tests, logging test messages only...', flush=True)
                 Log.__level__ = Log.LEVEL_TEST
             else:
                 # Not running unit tests, default to maximum logging level
-                print('No logging level has been defined, defaulting to maximum logging...')
+                print('No logging level has been defined, defaulting to maximum logging...', flush=True)
                 Log.__level__ = Log.LEVEL_TRACE
 
         # Retrieve current timestamp
@@ -273,7 +273,7 @@ class Log:
 
         # Display the message if appropriate based on the current log level
         if Log.__level__ is None or Log.__level__ >= level:
-            print(message_formatted)
+            print(message_formatted, flush=True)
 
         # Add entry to the log
         Log.__history__.append(history)
