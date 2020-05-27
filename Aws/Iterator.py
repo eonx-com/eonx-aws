@@ -1,3 +1,6 @@
+from Aws.Lambda.Log import Log
+
+
 class Iterator:
     @staticmethod
     def iterate(client, method_name, data_key, arguments={}, token_key_read='nextToken', token_key_write='nextToken') -> list:
@@ -39,6 +42,8 @@ class Iterator:
             return return_list
 
         while True:
+            Log.trace('Result: {result}'.format(result=result))
+
             return_list.extend(result[data_key])
 
             # Check if there are any more results to retrieve
@@ -47,6 +52,7 @@ class Iterator:
 
             # Add pagination token to next method call and get next page of results
             arguments[token_key_write] = result[token_key_read]
+            Log.trace('Arguments: {arguments}'.format(arguments=arguments))
             result = method_to_call(**arguments)
 
         # Return the results we found
