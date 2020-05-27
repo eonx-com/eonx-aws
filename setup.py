@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='eonx-aws',
-    version='0.0.8',
+    version='0.0.9',
     description='eonx-aws',
     url='git@github.com:eonx-com/eonx-aws.git',
     author='Damian Sloane',
@@ -13,6 +13,7 @@ setup(
         'Aws.Cloudwatch',
         'Aws.Ecs',
         'Aws.Lambda',
+        'Aws.Logs',
         'Aws.Sso'
     ],
     zip_safe=False,

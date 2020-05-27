@@ -1,6 +1,6 @@
 class Iterator:
     @staticmethod
-    def iterate(client, method_name, data_key, arguments={}, token_key='nextToken') -> list:
+    def iterate(client, method_name, data_key, arguments={}, token_key_read='nextToken', token_key_write='nextToken') -> list:
         """
         Call an AWS client method and iterate to retrieve all available results
 
@@ -16,8 +16,11 @@ class Iterator:
         :param data_key: The key in the AWS results that contains the response data
         :type data_key: str
 
-        :param token_key: The key in the AWS results that contains the pagination token
-        :type data_key: str
+        :param token_key_read: The key in the AWS results that contains the pagination token
+        :type token_key_read: str
+
+        :param token_key_write: The key in the AWS results that contains to write back on subsequent calls
+        :type token_key_write: str
 
         :return: List of results
         
@@ -39,11 +42,11 @@ class Iterator:
             return_list.extend(result[data_key])
 
             # Check if there are any more results to retrieve
-            if token_key not in result.keys() or result[token_key] is None:
+            if token_key_read not in result.keys() or result[token_key_read] is None:
                 break
 
             # Add pagination token to next method call and get next page of results
-            arguments[token_key] = result[token_key]
+            arguments[token_key_write] = result[token_key_read]
             result = method_to_call(**arguments)
 
         # Return the results we found
