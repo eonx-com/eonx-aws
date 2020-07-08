@@ -44,16 +44,16 @@ class Client(BaseClient):
         Start a new EC2 instance
 
         :param instance_type: Optional Ec2 Instance type/size
-        :type instance_type: str
+        :type instance_type: Optional[str]
 
         :param image_id: Optional Instance AMI ID to run the instance with
-        :type image_id: str
+        :type image_id: Optional[str]
 
         :param shutdown_behavior: Optional behaviour of the EC2 instance storage when shutdown
-        :type shutdown_behavior: str
+        :type shutdown_behavior: Optional[str]
 
         :param user_data: Optional Bash script to run on the instance at startup
-        :type user_data: str
+        :type user_data: Optional[str]
 
         :param network_interfaces: Optional dict for the creation of a network interface to attach to the instance
         :type network_interfaces: Optional[Dict]
