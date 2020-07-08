@@ -86,6 +86,7 @@ class Client(BaseClient):
 
         :return: Describe instance object
         """
+
         instances = Iterator.iterate(
             client=self.__client__,
             method_name='describe_instances',
