@@ -2,6 +2,8 @@ from typing import Optional
 from Aws.BaseClient import BaseClient
 from Aws.Ec2.Region import Region
 from Aws.Iterator import Iterator
+from Aws.Instance import Instance
+
 
 
 class Client(BaseClient):
@@ -32,22 +34,28 @@ class Client(BaseClient):
 
     def run_instances(
             self,
+            image_id,
+            min_count,
+            max_count,
             instance_type=None,
-            image_id=None,
             user_data=None,
             shutdown_behavior=None,
             network_interfaces=None,
-            min_count=1,
-            max_count=1
     ):
         """
         Start a new EC2 instance
 
+        :param image_id: Instance AMI ID to run the instance with
+        :type image_id: str
+
+        :param min_count: Count for minimum instances to launch
+        :type min_count: int
+
+        :param max_count: Count for maximum instances to launch
+        :type max_count: int
+
         :param instance_type: Optional Ec2 Instance type/size
         :type instance_type: Optional[str]
-
-        :param image_id: Optional Instance AMI ID to run the instance with
-        :type image_id: Optional[str]
 
         :param shutdown_behavior: Optional behaviour of the EC2 instance storage when shutdown
         :type shutdown_behavior: Optional[str]
@@ -57,12 +65,6 @@ class Client(BaseClient):
 
         :param network_interfaces: Optional dict for the creation of a network interface to attach to the instance
         :type network_interfaces: Optional[Dict]
-
-        :param min_count: Optional count for minimum instances to launch
-        :type min_count: Optional[int]
-
-        :param max_count: Optional count for maximum instances to launch
-        :type max_count: Optional[int]
 
         :return: Run instances object
         """
@@ -77,17 +79,17 @@ class Client(BaseClient):
             NetworkInterfaces=network_interfaces
         )
 
-    def describe_instance(self, instance_ids=None):
+    def describe_instance(self, instance_ids):
         """
-        Describe an EC2 Instance
+        Describes EC2 instances
 
-        :param instance_ids: ARN of the task definition to describe
-        :type instance_ids: str
+        :param instance_ids: ID's of the EC2 Instances to describe
+        :type instance_ids: list
 
-        :return: Describe instance object
+        :return: Describe instances object
         """
 
-        instances = Iterator.iterate(
+        result = Iterator.iterate(
             client=self.__client__,
             method_name='describe_instances',
             data_key='Reservations',
@@ -96,4 +98,14 @@ class Client(BaseClient):
             }
         )
 
-        return instances
+        if 'Reservations' not in result:
+            raise Exception(
+                'Unexpected result when describing instances ({instance_ids}), could not find expected "Reservations" key'.format(instance_ids=instance_ids))
+
+        if len(result['Reservations']) == 0:
+            return None
+
+        instance = Instance(instance_ids)
+        instance.set_values(result['Reservations'][0])
+
+        return instance
