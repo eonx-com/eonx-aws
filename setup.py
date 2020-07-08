@@ -11,9 +11,11 @@ setup(
     packages=[
         'Aws',
         'Aws.Cloudwatch',
+        'AWs.Ec2',
         'Aws.Ecs',
         'Aws.Lambda',
         'Aws.Logs',
+        'Aws.Route53',
         'Aws.Sso'
     ],
     zip_safe=False,
