@@ -5,12 +5,12 @@ class Instance(BaseObject):
     """
     EC2 Region
     """
-    def __init__(self, instance_ids):
+    def __init__(self, arn):
         """
-        Initialize instance object
+        Initialize service object
 
-        :param instance_ids: The ID's of the Ec2 instances
-        :type instance_ids: list
+        :param arn: The EC2 services ARN
+        :type arn: str
         """
         # Call parent object init function
-        super().__init__(instance_ids)
+        super().__init__(arn)
